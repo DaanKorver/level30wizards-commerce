@@ -1,3 +1,4 @@
+import {MenuItem} from '@shopify/hydrogen-react/storefront-api-types';
 import {ReactNode} from 'react';
 import {Footer, links as footerLinks} from '../Footer/Footer';
 import {Header, links as headerLinks} from '../Header/Header';
@@ -10,14 +11,15 @@ export const links = () => [
 ];
 
 interface BaseLayoutProps {
+  items: Pick<MenuItem, 'title' | 'url'>[];
   children: ReactNode;
 }
 
 export function BaseLayout(props: BaseLayoutProps) {
-  const {children} = props;
+  const {items, children} = props;
   return (
     <>
-      <Header />
+      <Header items={items} />
       <main>{children}</main>
       <Footer />
     </>
