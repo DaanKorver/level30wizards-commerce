@@ -1,0 +1,6 @@
+.hero {
+  width: 100%;
+  height: calc(100svh - 70px);
+  background-color: hotpink;
+  padding: 1rem;
+}

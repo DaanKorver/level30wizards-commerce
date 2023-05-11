@@ -1,4 +1,4 @@
-import {type LinksFunction, type LoaderArgs} from '@shopify/remix-oxygen';
+import {cssBundleHref} from '@remix-run/css-bundle';
 import {
   Links,
   Meta,
@@ -8,11 +8,18 @@ import {
   useLoaderData,
 } from '@remix-run/react';
 import type {Shop} from '@shopify/hydrogen/storefront-api-types';
-import styles from './styles/app.css';
+import {type LoaderArgs} from '@shopify/remix-oxygen';
+import styles from '~/styles/app.css';
 import favicon from '../public/favicon.svg';
+import {
+  BaseLayout,
+  links as layoutLinks,
+} from './components/layout/BaseLayout/BaseLayout';
 
-export const links: LinksFunction = () => {
+export function links() {
   return [
+    ...layoutLinks(),
+    ...(cssBundleHref ? [{rel: 'stylesheet', href: cssBundleHref}] : []),
     {rel: 'stylesheet', href: styles},
     {
       rel: 'preconnect',
@@ -24,7 +31,7 @@ export const links: LinksFunction = () => {
     },
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
   ];
-};
+}
 
 export async function loader({context}: LoaderArgs) {
   const layout = await context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
@@ -45,9 +52,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello, {name}</h1>
-        <p>This is a custom storefront powered by Hydrogen</p>
-        <Outlet />
+        <BaseLayout>
+          <Outlet />
+        </BaseLayout>
         <ScrollRestoration />
         <Scripts />
       </body>
