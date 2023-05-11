@@ -10,6 +10,9 @@ import {
 import type {Shop} from '@shopify/hydrogen/storefront-api-types';
 import {type LoaderArgs} from '@shopify/remix-oxygen';
 import styles from '~/styles/app.css';
+import fonts from '~/styles/fonts.css';
+import normalize from '~/styles/normalize.css';
+import variables from '~/styles/variables.css';
 import favicon from '../public/favicon.svg';
 import {
   BaseLayout,
@@ -21,6 +24,9 @@ export function links() {
     ...layoutLinks(),
     ...(cssBundleHref ? [{rel: 'stylesheet', href: cssBundleHref}] : []),
     {rel: 'stylesheet', href: styles},
+    {rel: 'stylesheet', href: fonts},
+    {rel: 'stylesheet', href: normalize},
+    {rel: 'stylesheet', href: variables},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
