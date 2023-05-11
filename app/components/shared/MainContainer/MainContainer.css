@@ -1,0 +1,8 @@
+.main-container {
+  min-height: 100svh;
+  background-color: var(--white);
+  border-top-right-radius: var(--radius-xl);
+  border-top-left-radius: var(--radius-xl);
+  padding: 2rem;
+  padding-top: 5svh;
+}
