@@ -1,6 +1,10 @@
 .hero {
   width: 100%;
-  height: calc(100svh - 70px);
+  height: 95svh;
   background-color: hotpink;
   padding: 1rem;
+  padding-top: var(--header-height);
+  position: sticky;
+  top: 0;
+  z-index: -1;
 }
