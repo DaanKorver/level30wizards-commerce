@@ -9,6 +9,8 @@ import {
 } from '@remix-run/react';
 import type {Shop} from '@shopify/hydrogen/storefront-api-types';
 import {type LoaderArgs} from '@shopify/remix-oxygen';
+import Lenis from '@studio-freight/lenis';
+import {useLayoutEffect} from 'react';
 import styles from '~/styles/app.css';
 import fonts from '~/styles/fonts.css';
 import normalize from '~/styles/normalize.css';
@@ -48,6 +50,31 @@ export default function App() {
   const data = useLoaderData<typeof loader>();
 
   const {name} = data.layout.shop;
+
+  useLayoutEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+      direction: 'vertical', // vertical, horizontal
+      gestureDirection: 'vertical', // vertical, horizontal, both
+      smooth: true,
+      smoothTouch: false,
+      infinite: false,
+    });
+    window.Lenis = lenis;
+
+    let rAF: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rAF = requestAnimationFrame(raf);
+    }
+    rAF = requestAnimationFrame(raf);
+
+    return () => {
+      rAF = requestAnimationFrame(raf);
+      lenis?.destroy();
+    };
+  }, []);
 
   return (
     <html lang="en">
