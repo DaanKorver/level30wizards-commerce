@@ -18,7 +18,7 @@ export function BaseLayout(props: BaseLayoutProps) {
   return (
     <>
       <Header />
-      <main className="container">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );

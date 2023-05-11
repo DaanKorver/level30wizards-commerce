@@ -37,7 +37,7 @@ p {
 }
 
 main {
-  min-height: 100svh;
+  min-height: calc(100svh - 70px);
 }
 
 .container {
