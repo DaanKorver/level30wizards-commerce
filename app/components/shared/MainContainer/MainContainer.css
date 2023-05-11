@@ -5,4 +5,6 @@
   border-top-left-radius: var(--radius-xl);
   padding: 2rem;
   padding-top: 5svh;
+  position: relative;
+  z-index: 2;
 }
