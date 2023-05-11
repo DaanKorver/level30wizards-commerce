@@ -10,7 +10,8 @@
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
     "typecheck": "tsc --noEmit",
     "g": "shopify hydrogen generate",
-    "component": "node scripts/component"
+    "component": "node scripts/component",
+    "icon": "svgr app/icons --index-template app/icons/index-template.js --config-file .svgr.config.js --out-dir app/components/icons"
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
@@ -31,6 +32,7 @@
     "@remix-run/dev": "1.15.0",
     "@shopify/oxygen-workers-types": "^3.17.2",
     "@shopify/prettier-config": "^1.1.2",
+    "@svgr/cli": "^8.0.1",
     "@types/eslint": "^8.4.10",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
