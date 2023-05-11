@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
+import {Menu} from '@shopify/hydrogen-react/storefront-api-types';
 import type {Shop} from '@shopify/hydrogen/storefront-api-types';
 import {type LoaderArgs} from '@shopify/remix-oxygen';
 import Lenis from '@studio-freight/lenis';
@@ -42,22 +43,30 @@ export function links() {
 }
 
 export async function loader({context}: LoaderArgs) {
-  const layout = await context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
+  const layout = await context.storefront.query<{shop: Shop; menu: Menu}>(
+    LAYOUT_QUERY,
+  );
   return {layout};
 }
 
 export default function App() {
-  const data = useLoaderData<typeof loader>();
+  const {layout} = useLoaderData<typeof loader>();
 
-  const {name} = data.layout.shop;
+  const {name, primaryDomain} = layout.shop;
+  let {items} = layout.menu;
+  items = items.map((item) => {
+    if (!item.url) return item;
+    item.url = item.url.replace(primaryDomain.url, '');
+    return item;
+  });
 
   useLayoutEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
-      direction: 'vertical', // vertical, horizontal
-      gestureDirection: 'vertical', // vertical, horizontal, both
-      smooth: true,
+      orientation: 'vertical', // vertical, horizontal
+      gestureOrientation: 'vertical', // vertical, horizontal, both
+      smoothWheel: true,
       smoothTouch: false,
       infinite: false,
     });
@@ -85,7 +94,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <BaseLayout>
+        <BaseLayout items={items}>
           <Outlet />
         </BaseLayout>
         <ScrollRestoration />
@@ -100,6 +109,16 @@ const LAYOUT_QUERY = `#graphql
     shop {
       name
       description
+      primaryDomain {
+        url
+      }
+    }
+    menu(handle: "header") {
+      handle
+      items {
+        title
+        url
+      }
     }
   }
 `;
