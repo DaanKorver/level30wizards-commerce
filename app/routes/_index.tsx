@@ -1,5 +1,6 @@
 import {cssBundleHref} from '@remix-run/css-bundle';
-import {LinksFunction, LoaderArgs, json} from '@shopify/remix-oxygen';
+import {Product} from '@shopify/hydrogen/storefront-api-types';
+import {LinksFunction, LoaderArgs} from '@shopify/remix-oxygen';
 import {Hero, links as heroLinks} from '~/components/shared/Hero/Hero';
 import {
   MainContainer,
@@ -21,18 +22,42 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export async function loader({params, context: {storefront}}: LoaderArgs) {
-  const settings = await storefront.query(
+export async function loader({context: {storefront}}: LoaderArgs) {
+  const {products} = await storefront.query<{products: Product[]}>(
     `
   #graphql
-  query a {
-    menu(handle: "Header") {
-      title
+  query getCollections {
+    products(first: 3) {
+      nodes {
+        id
+        handle
+        title
+        handle
+        options(first: 3) {
+          name
+          values
+        }
+        tags
+        media(first: 1) {
+          nodes {
+            ... on MediaImage {
+              image {
+                id
+                url
+                altText
+                width
+                height
+              }
+            }
+          }
+        }
+      }
+  
     }
   }
   `,
   );
-  return json(settings);
+  return products;
 }
 
 export default function Index() {

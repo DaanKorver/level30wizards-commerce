@@ -34,7 +34,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--pink);
+  background: var(--white);
   font-family: 'Roboto', 'sans-serif';
   color: var(--black);
 }

@@ -1,10 +1,21 @@
 .main-container {
   min-height: 100svh;
   background-color: var(--white);
-  border-top-right-radius: var(--radius-xl);
-  border-top-left-radius: var(--radius-xl);
+
   padding: 2rem;
-  padding-top: 5svh;
   position: relative;
   z-index: 2;
+}
+
+.main-container::before {
+  content: '';
+  position: absolute;
+  width: 100vw;
+  height: 5svh;
+  left: 0;
+  top: 0;
+  transform: translateY(-95%);
+  border-top-right-radius: var(--radius-xl);
+  border-top-left-radius: var(--radius-xl);
+  background-color: var(--white);
 }

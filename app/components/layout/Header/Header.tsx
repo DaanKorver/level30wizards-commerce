@@ -1,34 +1,47 @@
-import {Link} from '@remix-run/react';
-import {MenuItem} from '@shopify/hydrogen-react/storefront-api-types';
+import {Link, useLoaderData} from '@remix-run/react';
+import {MenuItem} from '@shopify/hydrogen/storefront-api-types';
 import {useCallback, useEffect, useState} from 'react';
-import {useMedia} from 'react-use';
+import {useLocation, useMedia} from 'react-use';
 import {Cart, Cross, Menu, User} from '~/components/icons';
 import styles from './Header.module.css';
 
 export const links = () => [{rel: 'stylesheet', href: styles}];
 
-interface HeaderProps {
-  items: Pick<MenuItem, 'title' | 'url'>[];
-}
+interface HeaderProps {}
 
 export function Header(props: HeaderProps) {
-  const {items} = props;
   const [scrolled, setScrolled] = useState(false);
 
   const [hamburger, setHamburger] = useState(false);
   const isMobile = useMedia('(max-width: 768px)');
+  const location = useLocation();
+
+  const {layout} = useLoaderData();
+
+  const {name, primaryDomain} = layout.shop;
+  let {items}: {items: MenuItem[]} = layout.menu;
+  items = items.map((item) => {
+    if (!item.url) return item;
+    item.url = item.url.replace(primaryDomain.url, '');
+    return item;
+  });
 
   const onScroll = useCallback(() => {
     setScrolled(window.scrollY > window.innerHeight * 0.8);
   }, []);
 
   useEffect(() => {
+    if (location.pathname !== '/') {
+      setScrolled(true);
+      return;
+    }
+
     window.addEventListener('scroll', onScroll);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [location.pathname, onScroll]);
 
   return (
     <header className={`navbar ${scrolled ? 'active' : ''}`}>
