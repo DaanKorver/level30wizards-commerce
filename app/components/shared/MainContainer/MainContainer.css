@@ -1,5 +1,5 @@
 .main-container {
-  min-height: 100svh;
+  min-height: calc(100 * var(--vh));
   background-color: var(--white);
 
   padding: 2rem;
@@ -11,7 +11,7 @@
   content: '';
   position: absolute;
   width: 100vw;
-  height: 5svh;
+  height: calc(5 * var(--vh));
   left: 0;
   top: 0;
   transform: translateY(-95%);
