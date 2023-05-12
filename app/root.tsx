@@ -5,13 +5,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
 } from '@remix-run/react';
 import {Menu} from '@shopify/hydrogen-react/storefront-api-types';
 import type {Shop} from '@shopify/hydrogen/storefront-api-types';
 import {type LoaderArgs} from '@shopify/remix-oxygen';
 import Lenis from '@studio-freight/lenis';
-import {useLayoutEffect} from 'react';
+import {useEffect} from 'react';
 import styles from '~/styles/app.css';
 import fonts from '~/styles/fonts.css';
 import normalize from '~/styles/normalize.css';
@@ -50,17 +49,7 @@ export async function loader({context}: LoaderArgs) {
 }
 
 export default function App() {
-  const {layout} = useLoaderData<typeof loader>();
-
-  const {name, primaryDomain} = layout.shop;
-  let {items} = layout.menu;
-  items = items.map((item) => {
-    if (!item.url) return item;
-    item.url = item.url.replace(primaryDomain.url, '');
-    return item;
-  });
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
@@ -94,7 +83,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <BaseLayout items={items}>
+        <BaseLayout>
           <Outlet />
         </BaseLayout>
         <ScrollRestoration />
