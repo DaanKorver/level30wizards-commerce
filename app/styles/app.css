@@ -75,7 +75,7 @@ p {
 }
 
 main {
-  min-height: calc(100svh - 70px);
+  min-height: calc(calc(50 * var(--vh)) - 70px);
 }
 
 .center {

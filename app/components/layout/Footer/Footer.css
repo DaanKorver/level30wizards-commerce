@@ -1,5 +1,5 @@
 footer {
-  min-height: 50svh;
+  min-height: calc(50 * var(--vh));
   background-color: #333333;
   color: #ffffff;
   padding: 1rem;
