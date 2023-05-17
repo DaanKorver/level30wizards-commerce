@@ -4,6 +4,7 @@ import {useCallback, useEffect, useState} from 'react';
 import {useLocation, useMedia} from 'react-use';
 import {Cart, Cross, Menu, User} from '~/components/icons';
 import styles from './Header.module.css';
+import sanitizeUrls from '~/utils/sanitizeUrls';
 
 export const links = () => [{rel: 'stylesheet', href: styles}];
 
@@ -19,12 +20,8 @@ export function Header(props: HeaderProps) {
   const {layout} = useLoaderData();
 
   const {name, primaryDomain} = layout.shop;
-  let {items}: {items: MenuItem[]} = layout.menu;
-  items = items.map((item) => {
-    if (!item.url) return item;
-    item.url = item.url.replace(primaryDomain.url, '');
-    return item;
-  });
+  let {items}: {items: MenuItem[]} = layout.header;
+  items = sanitizeUrls(items, primaryDomain.url);
 
   const onScroll = useCallback(() => {
     setScrolled(window.scrollY > window.innerHeight * 0.8);

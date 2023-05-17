@@ -9,10 +9,6 @@ const filters = ['Glazed', 'Chocolate', 'Fruit', 'Filled'];
 export function Filters(props: FiltersProps) {
   const [activeFilter, setFilter] = useState(-1);
 
-  useEffect(() => {
-    console.log(filters[activeFilter]);
-  }, [activeFilter, filters]);
-
   return (
     <div className="filter-container">
       <h2 className="fs-xl">Filters</h2>
