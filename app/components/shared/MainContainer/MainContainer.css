@@ -19,3 +19,9 @@
   border-top-left-radius: var(--radius-xl);
   background-color: var(--white);
 }
+
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}

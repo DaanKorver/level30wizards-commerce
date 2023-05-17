@@ -33,11 +33,21 @@ export async function loader({context: {storefront}}: LoaderArgs) {
         handle
         title
         handle
+        metafield(key: "accent", namespace: "custom") {
+          value
+        }
         options(first: 3) {
           name
           values
         }
         tags
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+     
         media(first: 1) {
           nodes {
             ... on MediaImage {
@@ -57,6 +67,7 @@ export async function loader({context: {storefront}}: LoaderArgs) {
   }
   `,
   );
+
   return products;
 }
 
