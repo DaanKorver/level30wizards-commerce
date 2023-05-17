@@ -15,6 +15,7 @@ import styles from '~/styles/app.css';
 import fonts from '~/styles/fonts.css';
 import normalize from '~/styles/normalize.css';
 import variables from '~/styles/variables.css';
+import typography from '~/styles/typography.css';
 import favicon from '../public/favicon.svg';
 import {
   BaseLayout,
@@ -29,6 +30,7 @@ export function links() {
     {rel: 'stylesheet', href: fonts},
     {rel: 'stylesheet', href: normalize},
     {rel: 'stylesheet', href: variables},
+    {rel: 'stylesheet', href: typography},
     {
       rel: 'preconnect',
       href: 'https://cdn.shopify.com',
