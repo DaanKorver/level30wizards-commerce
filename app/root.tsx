@@ -103,13 +103,47 @@ const LAYOUT_QUERY = `#graphql
       primaryDomain {
         url
       }
+      privacyPolicy {
+        title
+        body
+        handle
+      }
+      refundPolicy{
+        title
+        body
+        handle
+      }
+      shippingPolicy{
+        title
+        body
+        handle
+      }
+      termsOfService{
+        title
+        body
+        handle
+      }
     }
-    menu(handle: "header") {
+    header: menu(handle: "header") {
       handle
       items {
         title
         url
       }
     }
+
+      explore: menu(handle: "footer-explore") {
+        items {
+          title
+          url
+        }
+      }
+
+      socials: menu(handle: "footer-socials") {
+        items {
+          title
+          url
+        }
+      }
   }
 `;

@@ -25,3 +25,15 @@
 .fs-regular {
   font-weight: 400;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.black {
+  font-weight: 900;
+}
+
+.italic {
+  font-style: italic;
+}
