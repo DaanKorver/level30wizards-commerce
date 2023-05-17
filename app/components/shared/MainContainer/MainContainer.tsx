@@ -7,9 +7,11 @@ import {
   links as productCardLinks,
 } from '../ProductCard/ProductCard';
 import {} from '../ProductCard/ProductCard';
+import {Filters, links as filterLinks} from '~/components/Filters/Filters';
 
 export const links = () => [
   ...productCardLinks(),
+  ...filterLinks(),
   {rel: 'stylesheet', href: styles},
 ];
 
@@ -24,6 +26,7 @@ export function MainContainer(props: MainContainerProps) {
         <h2 className="fs-2xl">
           SHOP DONUTS<sup className="fs-regular fs-md">({products.length})</sup>
         </h2>
+        <Filters />
         <div className="product-container">
           {[
             ...products,
