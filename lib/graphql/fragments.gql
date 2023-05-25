@@ -1,0 +1,51 @@
+fragment Legal on ShopPolicy {
+	title
+	body
+	handle
+}
+
+fragment Menu on Menu {
+	items {
+		title
+		url
+	}
+}
+
+fragment Image on MediaImage {
+	image {
+		id
+		url
+		altText
+		width
+		height
+	}
+}
+
+fragment Product on Product {
+	id
+	handle
+	title
+	handle
+	metafield(key: "accent", namespace: "custom") {
+		value
+	}
+	options(first: 3) {
+		name
+		values
+	}
+	tags
+	priceRange {
+		minVariantPrice {
+			amount
+			currencyCode
+		}
+	}
+
+	media(first: 1) {
+		nodes {
+			... on MediaImage {
+				...Image
+			}
+		}
+	}
+}

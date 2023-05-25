@@ -1,0 +1,39 @@
+.fs-xs {
+  font-size: 0.75rem;
+}
+
+.fs-sm {
+  font-size: 0.875rem;
+}
+
+.fs-md {
+  font-size: 1rem;
+}
+
+.fs-lg {
+  font-size: 1.25rem;
+}
+
+.fs-xl {
+  font-size: 1.5rem;
+}
+
+.fs-2xl {
+  font-size: 2rem;
+}
+
+.fs-regular {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.black {
+  font-weight: 900;
+}
+
+.italic {
+  font-style: italic;
+}

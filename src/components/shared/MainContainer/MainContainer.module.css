@@ -1,0 +1,27 @@
+.main-container {
+	min-height: calc(100 * var(--vh));
+	background-color: var(--white);
+
+	padding: 2rem;
+	position: relative;
+	z-index: 2;
+}
+
+.main-container::before {
+	content: '';
+	position: absolute;
+	width: 100vw;
+	height: calc(5 * var(--vh));
+	left: 0;
+	top: 0;
+	transform: translateY(-95%);
+	border-top-right-radius: var(--radius-xl);
+	border-top-left-radius: var(--radius-xl);
+	background-color: var(--white);
+}
+
+.product-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
