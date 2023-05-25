@@ -4,8 +4,6 @@ require('dotenv').config({
 
 const API_URL = `https://${process.env.PUBLIC_STORE_DOMAIN}/api/${process.env.PUBLIC_STOREFRONT_API_VERSION}/graphql.json`
 
-console.log(API_URL)
-
 module.exports = {
 	schema: [
 		{

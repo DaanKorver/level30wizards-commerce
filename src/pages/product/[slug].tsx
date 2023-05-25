@@ -11,8 +11,6 @@ interface PageProps {
 
 export default function Page(props: PageProps) {
 	const { product } = props
-	console.log(product)
-
 	return (
 		<div className="container" style={{ paddingTop: '70px' }}>
 			<h1>{product?.title}</h1>
@@ -28,8 +26,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 			slug: node.handle,
 		},
 	}))
-
-	console.log(paths)
 
 	return {
 		paths: paths,
