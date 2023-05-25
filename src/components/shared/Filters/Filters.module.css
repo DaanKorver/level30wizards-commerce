@@ -1,5 +1,6 @@
 .filter-container {
 	margin: 1.5rem 0;
+	overflow: hidden;
 }
 
 .filter-list {
@@ -10,6 +11,7 @@
 	gap: 0.75rem;
 	margin: 1rem 0;
 	padding: 0;
+	overflow: auto;
 }
 
 .filter-list button {

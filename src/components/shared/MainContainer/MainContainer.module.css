@@ -1,8 +1,7 @@
 .main-container {
 	min-height: calc(100 * var(--vh));
 	background-color: var(--white);
-
-	padding: 2rem;
+	padding: 1rem 0;
 	position: relative;
 	z-index: 2;
 }
@@ -22,6 +21,14 @@
 
 .product-container {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(1, 1fr);
 	gap: 2rem;
+
+	@media (--md) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (--lg) {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }

@@ -88,10 +88,5 @@ main {
 	max-width: var(--container);
 	width: 100%;
 	margin: 0 auto;
-}
-
-@media (max-width: 1280px) {
-	.container {
-		padding: 0 1rem;
-	}
+	padding: 0 1rem;
 }
