@@ -47,6 +47,15 @@ export async function loader({context: {storefront}}: LoaderArgs) {
             currencyCode
           }
         }
+
+        variants(first: 10) {
+          edges {
+            node {
+              id
+    
+            }
+          }
+        }
      
         media(first: 1) {
           nodes {

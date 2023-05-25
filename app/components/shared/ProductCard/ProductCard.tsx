@@ -4,10 +4,12 @@ import {ProductPriceRange} from '@shopify/hydrogen/storefront-api-types';
 import formatPrice from '~/utils/formatPrice';
 import transparentize from '~/utils/transparentize';
 import {Link} from '@remix-run/react';
+import {useCart, useCartLine} from '@shopify/hydrogen-react';
 
 export const links = () => [{rel: 'stylesheet', href: styles}];
 
 interface ProductCardProps {
+  id: string;
   title: string;
   image: string;
   price: ProductPriceRange;
@@ -17,34 +19,46 @@ interface ProductCardProps {
 }
 
 export function ProductCard(props: ProductCardProps) {
-  const {title, image, price, shortDesc, color, slug} = props;
+  const {id, title, image, price, shortDesc, color, slug} = props;
+
+  const {linesAdd, totalQuantity, status} = useCart();
+
+  const merchandise = {
+    merchandiseId: id,
+    quantity: 1,
+  };
 
   return (
-    <Link to={`/product/${slug}`} className="product-card">
-      <div
-        className="product-thumbnail"
-        style={{
-          backgroundColor: transparentize(color, 0.5),
-        }}
-      >
-        <ul className="product-card-tags">
-          <li>Some tag</li>
-        </ul>
-        <div className="product-thumbnail-overlay">
-          <p className="fs-xl">View donut</p>
+    <div>
+      <Link to={`/product/${slug}`} className="product-card">
+        <div
+          className="product-thumbnail"
+          style={{
+            backgroundColor: transparentize(color, 0.5),
+          }}
+        >
+          <ul className="product-card-tags">
+            <li>Some tag</li>
+          </ul>
+          <div className="product-thumbnail-overlay">
+            <p className="fs-xl">View donut</p>
+          </div>
+          <Image src={image} alt={title} />
         </div>
-        <Image src={image} alt={title} />
-      </div>
-      <div className="product-price">
-        <h3 className="fs-xl">{title}</h3>
-        <p className="fs-lg">
-          {formatPrice(
-            Number(price.minVariantPrice.amount),
-            price.minVariantPrice.currencyCode,
-          )}
-        </p>
-      </div>
-      <p>{shortDesc}</p>
-    </Link>
+        <div className="product-price">
+          <h3 className="fs-xl">{title}</h3>
+          <p className="fs-lg">
+            {formatPrice(
+              Number(price.minVariantPrice.amount),
+              price.minVariantPrice.currencyCode,
+            )}
+          </p>
+        </div>
+        <p>{shortDesc}</p>
+      </Link>
+      <button onClick={() => linesAdd([merchandise])}>Add to cart</button>
+      <pre>{totalQuantity}</pre>
+      <pre>{status}</pre>
+    </div>
   );
 }

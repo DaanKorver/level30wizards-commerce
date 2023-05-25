@@ -20,6 +20,8 @@ interface MainContainerProps {}
 export function MainContainer(props: MainContainerProps) {
   const {nodes: products}: {nodes: Product[]} = useLoaderData();
 
+  console.log(products);
+
   return (
     <div className="main-container">
       <div className="container">
@@ -35,11 +37,22 @@ export function MainContainer(props: MainContainerProps) {
             ...products.reverse(),
           ].map(
             (
-              {handle, title, media, options, id, tags, priceRange, metafield},
+              {
+                handle,
+                title,
+                media,
+                options,
+                variants: {edges},
+                id,
+                tags,
+                priceRange,
+                metafield,
+              },
               i,
             ) => (
               <ProductCard
                 key={id}
+                id={edges[0].node.id}
                 title={title}
                 image={(media.nodes[0] as MediaImage).image?.url as string}
                 price={priceRange}

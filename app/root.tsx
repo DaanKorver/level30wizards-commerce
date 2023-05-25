@@ -21,6 +21,7 @@ import {
   BaseLayout,
   links as layoutLinks,
 } from './components/layout/BaseLayout/BaseLayout';
+import {CartProvider, useCart, ShopifyProvider} from '@shopify/hydrogen-react';
 
 export function links() {
   return [
@@ -85,11 +86,28 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <BaseLayout>
-          <Outlet />
-        </BaseLayout>
-        <ScrollRestoration />
-        <Scripts />
+        <ShopifyProvider
+          storeDomain="https://nextjs-starterr.myshopify.com"
+          storefrontToken="9f467473e78044de137a8d5faece0706"
+          storefrontApiVersion="2023-04"
+          countryIsoCode="NL"
+          languageIsoCode="NL"
+        >
+          <CartProvider
+            onLineAdd={() => {
+              console.log('a line is being added');
+            }}
+            onLineAddComplete={() => {
+              console.log('a line has been added');
+            }}
+          >
+            <BaseLayout>
+              <Outlet />
+            </BaseLayout>
+            <ScrollRestoration />
+            <Scripts />
+          </CartProvider>
+        </ShopifyProvider>
       </body>
     </html>
   );

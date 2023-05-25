@@ -2028,6 +2028,18 @@
     type-fest "^3.6.0"
     worktop "^0.7.3"
 
+"@shopify/hydrogen-react@^2023.4.3":
+  version "2023.4.3"
+  resolved "https://registry.yarnpkg.com/@shopify/hydrogen-react/-/hydrogen-react-2023.4.3.tgz#8212be5528a42cb0a5c80e3d13ec81a00695e11f"
+  integrity sha512-b8dV+antvRmlhJOonMa5mX+tLbmw+Jgj6gidgfD8Awn5xI06YRKcyEb1UMuncEsy5d+yvWlAnIUCdIVHKHyvKw==
+  dependencies:
+    "@google/model-viewer" "^1.12.1"
+    "@xstate/fsm" "^2.0.0"
+    "@xstate/react" "^3.2.1"
+    graphql "^16.6.0"
+    type-fest "^3.6.0"
+    worktop "^0.7.3"
+
 "@shopify/hydrogen@^2023.4.0":
   version "2023.4.0"
   resolved "https://registry.yarnpkg.com/@shopify/hydrogen/-/hydrogen-2023.4.0.tgz#74fe908ea4de9ab5fbabc3cc842f6912a4a2fda6"
