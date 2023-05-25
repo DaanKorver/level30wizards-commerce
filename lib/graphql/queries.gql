@@ -1,0 +1,54 @@
+query getLayout {
+	shop {
+		name
+		description
+		primaryDomain {
+			url
+		}
+		privacyPolicy {
+			...Legal
+		}
+		refundPolicy {
+			...Legal
+		}
+		shippingPolicy {
+			...Legal
+		}
+		termsOfService {
+			...Legal
+		}
+	}
+	header: menu(handle: "header") {
+		...Menu
+	}
+
+	explore: menu(handle: "footer-explore") {
+		...Menu
+	}
+
+	socials: menu(handle: "footer-socials") {
+		...Menu
+	}
+}
+
+query getProducts {
+	products(first: 3) {
+		nodes {
+			...Product
+		}
+	}
+}
+
+query getProductSlugs {
+	products(first: 10) {
+		nodes {
+			handle
+		}
+	}
+}
+
+query getProductByHandle($handle: String!) {
+	productByHandle(handle: $handle) {
+		...Product
+	}
+}

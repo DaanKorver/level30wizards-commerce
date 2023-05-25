@@ -1,0 +1,95 @@
+.product-card,
+.product-card:visited {
+	color: var(--black);
+	text-decoration: none;
+}
+
+.product-thumbnail {
+	background-color: darkslateblue;
+	padding: 2rem;
+	border-radius: var(--radius-lg);
+	margin-bottom: 1rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.product-thumbnail img {
+	width: 100%;
+	height: 100%;
+	transition: 200ms transform ease-in-out;
+}
+
+.product-price {
+	display: flex;
+	justify-content: space-between;
+}
+
+.product-card:hover .product-thumbnail::after {
+	opacity: 1;
+}
+
+.product-card:hover .product-thumbnail img {
+	transform: scale(1.2) rotate(-10deg);
+}
+
+.product-card {
+	position: relative;
+	width: 100%;
+}
+
+.product-thumbnail::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(10px);
+	opacity: 0;
+	transition: 300ms opacity;
+}
+
+.product-thumbnail-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 1rem;
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(30px);
+	transition: 300ms transform ease-out, 200ms opacity ease-in-out;
+	z-index: 2;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-family: 'Poppins', sans-serif;
+}
+
+.product-card:hover .product-thumbnail-overlay {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: all;
+}
+
+.product-card-tags {
+	position: absolute;
+	left: 2rem;
+	top: 2rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	z-index: 1;
+}
+
+.product-card-tags li {
+	background-color: var(--pink);
+	color: var(--white);
+	padding: 0.7rem 1rem;
+	border-radius: 999px;
+}
