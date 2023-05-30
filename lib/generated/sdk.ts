@@ -7670,7 +7670,7 @@ export type MenuFragment = { __typename?: 'Menu', items: Array<{ __typename?: 'M
 
 export type ImageFragment = { __typename?: 'MediaImage', image?: { __typename?: 'Image', id?: string | null, url: any, altText?: string | null, width?: number | null, height?: number | null } | null };
 
-export type ProductFragment = { __typename?: 'Product', id: string, handle: string, title: string, tags: Array<string>, metafield?: { __typename?: 'Metafield', value: string } | null, options: Array<{ __typename?: 'ProductOption', name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, media: { __typename?: 'MediaConnection', nodes: Array<{ __typename?: 'ExternalVideo' } | (
+export type ProductFragment = { __typename?: 'Product', id: string, handle: string, title: string, description: string, tags: Array<string>, metafield?: { __typename?: 'Metafield', value: string } | null, variants: { __typename?: 'ProductVariantConnection', edges: Array<{ __typename?: 'ProductVariantEdge', node: { __typename?: 'ProductVariant', id: string, title: string, selectedOptions: Array<{ __typename?: 'SelectedOption', name: string, value: string }> } }> }, options: Array<{ __typename?: 'ProductOption', name: string, values: Array<string> }>, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, media: { __typename?: 'MediaConnection', nodes: Array<{ __typename?: 'ExternalVideo' } | (
       { __typename?: 'MediaImage' }
       & ImageFragment
     ) | { __typename?: 'Model3d' } | { __typename?: 'Video' }> } };
@@ -7756,8 +7756,21 @@ export const ProductFragmentDoc = gql`
   handle
   title
   handle
+  description
   metafield(key: "accent", namespace: "custom") {
     value
+  }
+  variants(first: 5) {
+    edges {
+      node {
+        id
+        title
+        selectedOptions {
+          name
+          value
+        }
+      }
+    }
   }
   options(first: 3) {
     name

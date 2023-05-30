@@ -9,6 +9,8 @@ import Lenis from '@studio-freight/lenis'
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { GetLayoutQuery } from '../../lib/generated/sdk'
+import { CartProvider, ShopifyProvider } from '@shopify/hydrogen-react'
+import { PageTransition } from '@/components/shared/PageTransition/PageTransition'
 
 export default function App({
 	Component,
@@ -18,7 +20,7 @@ export default function App({
 }) {
 	useEffect(() => {
 		const lenis = new Lenis({
-			duration: 1.2,
+			duration: 1,
 			easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
 			orientation: 'vertical', // vertical, horizontal
 			gestureOrientation: 'vertical', // vertical, horizontal, both
@@ -42,8 +44,20 @@ export default function App({
 	}, [])
 
 	return (
-		<BaseLayout layout={pageProps.layout}>
-			<Component {...pageProps} />
-		</BaseLayout>
+		<ShopifyProvider
+			storeDomain={`https://${process.env.NEXT_PUBLIC_STORE_DOMAIN as string}`}
+			storefrontToken={process.env.NEXT_PUBLIC_STOREFRONT_API_TOKEN as string}
+			storefrontApiVersion={
+				process.env.NEXT_PUBLIC_STOREFRONT_API_VERSION as string
+			}
+			countryIsoCode="NL"
+			languageIsoCode="EN">
+			<CartProvider>
+				<PageTransition />
+				<BaseLayout layout={pageProps.layout}>
+					<Component {...pageProps} />
+				</BaseLayout>
+			</CartProvider>
+		</ShopifyProvider>
 	)
 }

@@ -1,3 +1,4 @@
+import { useFilter } from '@/state/filter'
 import {
 	Image,
 	MediaImage,
@@ -7,6 +8,7 @@ import {
 import { Filters } from '../Filters/Filters'
 import { ProductCard } from '../ProductCard/ProductCard'
 import styles from './MainContainer.module.css'
+import { AnimatePresence } from 'framer-motion'
 
 interface MainContainerProps {
 	products: ProductFragment[]
@@ -14,6 +16,9 @@ interface MainContainerProps {
 
 export function MainContainer(props: MainContainerProps) {
 	const { products } = props
+	const filter = useFilter()
+
+	console.log(filter, products)
 
 	return (
 		<div className={styles['main-container']}>
@@ -23,31 +28,38 @@ export function MainContainer(props: MainContainerProps) {
 				</h2>
 				<Filters />
 				<div className={styles['product-container']}>
-					{products.map(
-						(
-							{
-								handle,
-								title,
-								media,
-								options,
-								id,
-								tags,
-								priceRange,
-								metafield,
-							},
-							i
-						) => (
-							<ProductCard
-								key={id}
-								title={title}
-								image={(media.nodes as MediaImage[])[0].image as Image}
-								price={priceRange}
-								shortDesc=""
-								color={metafield?.value as string}
-								slug={handle}
-							/>
-						)
-					)}
+					<AnimatePresence>
+						{products
+							.filter(product => {
+								return !filter ? true : product.tags.includes(filter)
+							})
+							.map(
+								(
+									{
+										handle,
+										title,
+										media,
+										options,
+										id,
+										tags,
+										priceRange,
+										metafield,
+									},
+									i
+								) => (
+									<ProductCard
+										key={id}
+										title={title}
+										image={(media.nodes as MediaImage[])[0].image as Image}
+										price={priceRange}
+										shortDesc=""
+										color={metafield?.value as string}
+										slug={handle}
+										tags={tags}
+									/>
+								)
+							)}
+					</AnimatePresence>
 				</div>
 			</div>
 		</div>

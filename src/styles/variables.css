@@ -1,18 +1,22 @@
 :root {
-  --pink: #ff80ad;
-  --white: #ffffff;
-  --black: #333333;
-  --shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  --container: 1440px;
-  --header-height: 70px;
-  --radius-sm: 12px;
-  --radius-lg: 24px;
-  --radius-xl: 36px;
-  --vh: 1vh;
+	--pink: #ff80ad;
+	--white: #ffffff;
+	--black: #333333;
+	--grey: #888888;
+	--lightGrey: #ccc;
+
+	--shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	--container: 1440px;
+	--header-height: 70px;
+	--radius-sm: 12px;
+	--radius-lg: 24px;
+	--radius-xl: 36px;
+	--vh: 1vh;
+	--page: 1;
 }
 
 @supports (height: 1svh) {
-  :root {
-    --vh: 1svh;
-  }
+	:root {
+		--vh: 1svh;
+	}
 }

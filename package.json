@@ -13,12 +13,14 @@
     "watch-graphql": "graphql-codegen --watch -r dotenv/config"
   },
   "dependencies": {
+    "@shopify/hydrogen-react": "^2023.4.3",
     "@types/node": "20.2.3",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
     "dotenv": "^16.0.3",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
+    "framer-motion": "^10.12.16",
     "graphql": "^16.6.0",
     "graphql-codegen-plugin-typescript-swr": "0.8.3",
     "graphql-request": "5.1.0",
@@ -26,7 +28,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-use": "^17.4.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@csstools/postcss-global-data": "^1.0.3",

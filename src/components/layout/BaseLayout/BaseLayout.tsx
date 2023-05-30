@@ -4,6 +4,7 @@ import { Header } from '../Header/Header'
 import { Footer, Items } from '../Footer/Footer'
 import { GetLayoutQuery, MenuItem } from '../../../../lib/generated/sdk'
 import sanitizeUrls from '@/utils/sanitizeUrl'
+import { CartDrawer } from '@/components/shared/CartDrawer/CartDrawer'
 
 interface BaseLayoutProps {
 	layout: GetLayoutQuery
@@ -53,9 +54,13 @@ export function BaseLayout(props: BaseLayoutProps) {
 	]
 	return (
 		<>
-			<Header items={headerItems} />
-			<main>{children}</main>
-			<Footer items={footerItems} />
+			<CartDrawer />
+
+			<div className="page">
+				<Header items={headerItems} />
+				<main>{children}</main>
+				<Footer items={footerItems} />
+			</div>
 		</>
 	)
 }

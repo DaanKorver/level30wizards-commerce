@@ -85,11 +85,13 @@
 	margin: 0;
 	padding: 0;
 	z-index: 1;
+	display: flex;
+	gap: 0.5rem;
 }
 
 .product-card-tags li {
 	background-color: var(--pink);
 	color: var(--white);
 	padding: 0.7rem 1rem;
-	border-radius: 999px;
+	/* border-radius: 999px; */
 }

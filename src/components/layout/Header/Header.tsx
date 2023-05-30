@@ -3,6 +3,8 @@ import styles from './Header.module.css'
 import { useLocation, useMedia } from 'react-use'
 import Link from 'next/link'
 import { Cart, Cross, Menu, User } from '@/components/icons'
+import { CartButton } from '@/components/shared/CartButton/CartButton'
+import { CartDrawer } from '@/components/shared/CartDrawer/CartDrawer'
 
 interface HeaderProps {
 	items: { title: string; url: string }[]
@@ -14,7 +16,7 @@ export function Header(props: HeaderProps) {
 	const [scrolled, setScrolled] = useState(false)
 
 	const [hamburger, setHamburger] = useState(false)
-	const isMobile = useMedia('(max-width: 768px)')
+	const isMobile = useMedia('(max-width: 768px)', false)
 	const location = useLocation()
 
 	const onScroll = useCallback(() => {
@@ -57,16 +59,13 @@ export function Header(props: HeaderProps) {
 						</li>
 					))}
 				</ul>
-				<button onClick={() => setHamburger(!hamburger)}>
+				<button
+					className={styles['hamburger']}
+					onClick={() => setHamburger(!hamburger)}>
 					{hamburger ? <Cross /> : <Menu />}
 				</button>
 				<div className={styles['nav__icons']}>
-					<Link href="/">
-						<User />
-					</Link>
-					<Link href="/">
-						<Cart />
-					</Link>
+					<CartButton />
 				</div>
 			</nav>
 		</header>

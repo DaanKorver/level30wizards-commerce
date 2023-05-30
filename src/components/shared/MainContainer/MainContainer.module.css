@@ -10,7 +10,7 @@
 .main-container::before {
 	content: '';
 	position: absolute;
-	width: 100vw;
+	width: 100%;
 	height: calc(5 * var(--vh));
 	left: 0;
 	top: 0;

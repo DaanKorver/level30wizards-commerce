@@ -2,7 +2,7 @@ require('dotenv').config({
 	path: __dirname + '/.env',
 })
 
-const API_URL = `https://${process.env.PUBLIC_STORE_DOMAIN}/api/${process.env.PUBLIC_STOREFRONT_API_VERSION}/graphql.json`
+const API_URL = `https://${process.env.NEXT_PUBLIC_STORE_DOMAIN}/api/${process.env.NEXT_PUBLIC_STOREFRONT_API_VERSION}/graphql.json`
 
 module.exports = {
 	schema: [
@@ -11,7 +11,7 @@ module.exports = {
 				headers: {
 					'Content-Type': 'application/json',
 					Accept: 'application/json',
-					'X-Shopify-Storefront-Access-Token': `${process.env.PUBLIC_STOREFRONT_API_TOKEN}`,
+					'X-Shopify-Storefront-Access-Token': `${process.env.NEXT_PUBLIC_STOREFRONT_API_TOKEN}`,
 				},
 			},
 		},
@@ -24,7 +24,7 @@ module.exports = {
 				headers: {
 					'Content-Type': 'application/json',
 					Accept: 'application/json',
-					'X-Shopify-Storefront-Access-Token': `${process.env.PUBLIC_STOREFRONT_API_TOKEN}`,
+					'X-Shopify-Storefront-Access-Token': `${process.env.NEXT_PUBLIC_STOREFRONT_API_TOKEN}`,
 				},
 			},
 		},
@@ -48,7 +48,7 @@ module.exports = {
 									headers: {
 										'Content-Type': 'application/json',
 										Accept: 'application/json',
-										Authorization: `${process.env.PUBLIC_STOREFRONT_API_TOKEN}`,
+										Authorization: `${process.env.NEXT_PUBLIC_STOREFRONT_API_TOKEN}`,
 									},
 								},
 							},

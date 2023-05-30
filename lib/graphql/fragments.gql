@@ -26,8 +26,21 @@ fragment Product on Product {
 	handle
 	title
 	handle
+	description
 	metafield(key: "accent", namespace: "custom") {
 		value
+	}
+	variants(first: 5) {
+		edges {
+			node {
+				id
+				title
+				selectedOptions {
+					name
+					value
+				}
+			}
+		}
 	}
 	options(first: 3) {
 		name

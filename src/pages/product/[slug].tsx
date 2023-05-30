@@ -4,6 +4,10 @@ import {
 	GetLayoutQuery,
 	GetProductByHandleQuery,
 } from '../../../lib/generated/sdk'
+import Image from 'next/image'
+import { MediaImage } from '../../../lib/generated/sdk'
+import { SingleProduct } from '@/components/shared/SingleProduct/SingleProduct'
+import { ProductProvider } from '@shopify/hydrogen-react'
 
 interface PageProps {
 	product: GetProductByHandleQuery['productByHandle']
@@ -11,11 +15,15 @@ interface PageProps {
 
 export default function Page(props: PageProps) {
 	const { product } = props
+
 	return (
-		<div className="container" style={{ paddingTop: '70px' }}>
-			<h1>{product?.title}</h1>
-			<pre>{JSON.stringify(product, null, 2)}</pre>
-		</div>
+		product && (
+			<ProductProvider data={product}>
+				<div className="container" style={{ paddingTop: '70px' }}>
+					<SingleProduct item={product} />
+				</div>
+			</ProductProvider>
+		)
 	)
 }
 
