@@ -58,7 +58,7 @@ export function BaseLayout(props: BaseLayoutProps) {
 
 			<div className="page">
 				<Header items={headerItems} />
-				<main>{children}</main>
+				<main>{props.children}</main>
 				<Footer items={footerItems} />
 			</div>
 		</>

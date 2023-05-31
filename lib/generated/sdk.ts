@@ -7734,6 +7734,28 @@ export type GetProductTagsQuery = { __typename?: 'QueryRoot', productTags: (
     & ProductTagsFragment
   ) };
 
+export type GetLegalsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLegalsQuery = { __typename?: 'QueryRoot', shop: { __typename?: 'Shop', privacyPolicy?: (
+      { __typename?: 'ShopPolicy' }
+      & LegalFragment
+    ) | null, refundPolicy?: (
+      { __typename?: 'ShopPolicy' }
+      & LegalFragment
+    ) | null, shippingPolicy?: (
+      { __typename?: 'ShopPolicy' }
+      & LegalFragment
+    ) | null, termsOfService?: (
+      { __typename?: 'ShopPolicy' }
+      & LegalFragment
+    ) | null } };
+
+export type GetPagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPagesQuery = { __typename?: 'QueryRoot', pages: { __typename?: 'PageConnection', nodes: Array<{ __typename?: 'Page', handle: string, body: any, title: string }> } };
+
 export const LegalFragmentDoc = gql`
     fragment Legal on ShopPolicy {
   title
@@ -7876,6 +7898,35 @@ export const GetProductTagsDocument = gql`
   }
 }
     ${ProductTagsFragmentDoc}`;
+export const GetLegalsDocument = gql`
+    query getLegals {
+  shop {
+    privacyPolicy {
+      ...Legal
+    }
+    refundPolicy {
+      ...Legal
+    }
+    shippingPolicy {
+      ...Legal
+    }
+    termsOfService {
+      ...Legal
+    }
+  }
+}
+    ${LegalFragmentDoc}`;
+export const GetPagesDocument = gql`
+    query getPages {
+  pages(first: 10) {
+    nodes {
+      handle
+      body
+      title
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -7898,6 +7949,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getProductTags(variables?: GetProductTagsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProductTagsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductTagsQuery>(GetProductTagsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductTags', 'query');
+    },
+    getLegals(variables?: GetLegalsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLegalsQuery>(GetLegalsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getLegals', 'query');
+    },
+    getPages(variables?: GetPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPagesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPagesQuery>(GetPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getPages', 'query');
     }
   };
 }
@@ -7920,6 +7977,12 @@ export function getSdkWithHooks(client: GraphQLClient, withWrapper: SdkFunctionW
     },
     useGetProductTags(key: SWRKeyInterface, variables?: GetProductTagsQueryVariables, config?: SWRConfigInterface<GetProductTagsQuery, ClientError>) {
       return useSWR<GetProductTagsQuery, ClientError>(key, () => sdk.getProductTags(variables), config);
+    },
+    useGetLegals(key: SWRKeyInterface, variables?: GetLegalsQueryVariables, config?: SWRConfigInterface<GetLegalsQuery, ClientError>) {
+      return useSWR<GetLegalsQuery, ClientError>(key, () => sdk.getLegals(variables), config);
+    },
+    useGetPages(key: SWRKeyInterface, variables?: GetPagesQueryVariables, config?: SWRConfigInterface<GetPagesQuery, ClientError>) {
+      return useSWR<GetPagesQuery, ClientError>(key, () => sdk.getPages(variables), config);
     }
   };
 }

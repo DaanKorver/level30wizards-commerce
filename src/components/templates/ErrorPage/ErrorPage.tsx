@@ -1,7 +1,14 @@
 import styles from './ErrorPage.module.css'
 
-interface ErrorPageProps {}
+interface ErrorPageProps {
+	statusCode?: number | null
+}
 
 export function ErrorPage(props: ErrorPageProps) {
-	return <h1>Error</h1>
+	return (
+		<section className={styles['error-container']}>
+			<h1 style={{ marginTop: '70px' }}>{props?.statusCode || 404}</h1>
+			<p>Not found</p>
+		</section>
+	)
 }
