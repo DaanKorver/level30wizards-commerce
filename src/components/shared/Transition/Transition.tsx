@@ -11,9 +11,16 @@ interface TransitionProps {
 const variants = {
 	in: {
 		opacity: 1,
+		transition: {
+			duration: 0.3,
+		},
 	},
 	out: {
 		opacity: 0,
+		transition: {
+			delay: 0.15,
+			duration: 0.75,
+		},
 	},
 }
 
