@@ -37,7 +37,6 @@ export function PageTransition() {
 		const onStart = (e: string) => {
 			if (e == path) return
 
-			document.documentElement.style.setProperty('--page', '0')
 			setInTranstion(true)
 			controls.start('visible')
 		}
@@ -45,7 +44,6 @@ export function PageTransition() {
 		const changeRouteComplete = (e: string) => {
 			setPath(pathname)
 			setTimeout(() => {
-				document.documentElement.style.setProperty('--page', '1')
 				controls.start('hidden')
 				setInTranstion(false)
 			}, 500)
