@@ -111,7 +111,14 @@ main {
 	align-items: center;
 	cursor: pointer;
 
-	&.active {
-		border-color: red;
+	&.ghost {
+		background-color: var(--lightGrey);
+		color: var(--black);
+		transition: 150ms background-color ease-in-out;
+
+		&.active {
+			background-color: var(--pink);
+			color: var(--white);
+		}
 	}
 }

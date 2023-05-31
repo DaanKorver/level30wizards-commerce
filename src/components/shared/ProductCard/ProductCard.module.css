@@ -106,6 +106,7 @@
 	}
 
 	&::after {
+		/*! Idea by https://www.instagram.com/ikdoecreatief/ */
 		content: '';
 		position: absolute;
 		bottom: 0;

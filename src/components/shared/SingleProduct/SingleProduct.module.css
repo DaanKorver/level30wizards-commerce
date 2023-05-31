@@ -26,9 +26,15 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 1rem;
+		margin-bottom: 2rem;
 	}
 
 	button.active {
 		border: 1px solid red;
+	}
+
+	.buy-buttons {
+		display: flex;
+		gap: 1rem;
 	}
 }

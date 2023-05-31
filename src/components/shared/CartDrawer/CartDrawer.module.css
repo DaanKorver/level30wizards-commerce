@@ -77,6 +77,11 @@
 		.discount {
 			display: flex;
 			margin: 1rem 0;
+			flex-direction: column;
+
+			@media (--sm) {
+				flex-direction: row;
+			}
 
 			input {
 				padding: 0 0.5rem;

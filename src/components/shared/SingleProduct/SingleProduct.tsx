@@ -34,17 +34,14 @@ export function SingleProduct(props: SingleProductProps) {
 			<div className={styles['single-product-info']}>
 				<h1 className="fs-2xl">{item.title}</h1>
 				<p className="fs-sm">{item.description}</p>
-				<Money
-					as="b"
-					data={item.priceRange.minVariantPrice}
-					className="fs-xl"
-				/>
+				<Money data={item.priceRange.minVariantPrice} className="fs-2xl" />
 				<br />
-				<p>Select variant</p>
+				<hr />
+				<p className="fs-lg">Select amount</p>
 				<div className={styles['variants']}>
 					{variants.map(variant => (
 						<button
-							className={`btn ${
+							className={`btn ghost ${
 								selectedVariant === variant.node.id ? 'active' : ''
 							}`}
 							key={variant.node.id}
@@ -54,17 +51,21 @@ export function SingleProduct(props: SingleProductProps) {
 					))}
 				</div>
 				<br />
-				<AddToCartButton
-					disabled={!selectedVariant}
-					variantId={selectedVariant as string}>
-					Add to cart
-				</AddToCartButton>
+				<div className={styles['buy-buttons']}>
+					<AddToCartButton
+						className="btn"
+						disabled={!selectedVariant}
+						variantId={selectedVariant as string}>
+						Add to cart
+					</AddToCartButton>
 
-				<BuyNowButton
-					disabled={!selectedVariant}
-					variantId={selectedVariant as string}>
-					Buy now
-				</BuyNowButton>
+					<BuyNowButton
+						className="btn"
+						disabled={!selectedVariant}
+						variantId={selectedVariant as string}>
+						Buy now
+					</BuyNowButton>
+				</div>
 			</div>
 		</div>
 	)
