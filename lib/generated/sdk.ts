@@ -7675,6 +7675,8 @@ export type ProductFragment = { __typename?: 'Product', id: string, handle: stri
       & ImageFragment
     ) | { __typename?: 'Model3d' } | { __typename?: 'Video' }> } };
 
+export type ProductTagsFragment = { __typename?: 'StringConnection', edges: Array<{ __typename?: 'StringEdge', node: string }> };
+
 export type GetLayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7723,6 +7725,14 @@ export type GetProductByHandleQuery = { __typename?: 'QueryRoot', productByHandl
     { __typename?: 'Product' }
     & ProductFragment
   ) | null };
+
+export type GetProductTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProductTagsQuery = { __typename?: 'QueryRoot', productTags: (
+    { __typename?: 'StringConnection' }
+    & ProductTagsFragment
+  ) };
 
 export const LegalFragmentDoc = gql`
     fragment Legal on ShopPolicy {
@@ -7792,6 +7802,13 @@ export const ProductFragmentDoc = gql`
   }
 }
     `;
+export const ProductTagsFragmentDoc = gql`
+    fragment ProductTags on StringConnection {
+  edges {
+    node
+  }
+}
+    `;
 export const GetLayoutDocument = gql`
     query getLayout {
   shop {
@@ -7852,6 +7869,13 @@ export const GetProductByHandleDocument = gql`
 }
     ${ProductFragmentDoc}
 ${ImageFragmentDoc}`;
+export const GetProductTagsDocument = gql`
+    query getProductTags {
+  productTags(first: 10) {
+    ...ProductTags
+  }
+}
+    ${ProductTagsFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -7871,6 +7895,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getProductByHandle(variables: GetProductByHandleQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProductByHandleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductByHandleQuery>(GetProductByHandleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductByHandle', 'query');
+    },
+    getProductTags(variables?: GetProductTagsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProductTagsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductTagsQuery>(GetProductTagsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductTags', 'query');
     }
   };
 }
@@ -7890,6 +7917,9 @@ export function getSdkWithHooks(client: GraphQLClient, withWrapper: SdkFunctionW
     },
     useGetProductByHandle(key: SWRKeyInterface, variables: GetProductByHandleQueryVariables, config?: SWRConfigInterface<GetProductByHandleQuery, ClientError>) {
       return useSWR<GetProductByHandleQuery, ClientError>(key, () => sdk.getProductByHandle(variables), config);
+    },
+    useGetProductTags(key: SWRKeyInterface, variables?: GetProductTagsQueryVariables, config?: SWRConfigInterface<GetProductTagsQuery, ClientError>) {
+      return useSWR<GetProductTagsQuery, ClientError>(key, () => sdk.getProductTags(variables), config);
     }
   };
 }

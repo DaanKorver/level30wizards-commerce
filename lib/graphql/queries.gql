@@ -52,3 +52,9 @@ query getProductByHandle($handle: String!) {
 		...Product
 	}
 }
+
+query getProductTags {
+	productTags(first: 10) {
+		...ProductTags
+	}
+}

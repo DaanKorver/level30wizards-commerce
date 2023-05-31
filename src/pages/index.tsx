@@ -8,19 +8,19 @@ import { GetStaticProps } from 'next'
 import { nextClient } from '../../lib/client'
 import {
 	GetLayoutQuery,
+	GetProductTagsQuery,
 	GetProductsQuery,
-	Product,
 	ProductFragment,
+	ProductTagsFragment,
 } from '../../lib/generated/sdk'
-
-const inter = Inter({ subsets: ['latin'] })
 
 interface PageProps {
 	products: ProductFragment[]
+	tags: ProductTagsFragment['edges']
 }
 
 export default function Page(props: PageProps) {
-	const { products } = props
+	const { products, tags } = props
 
 	return (
 		<>
@@ -31,7 +31,7 @@ export default function Page(props: PageProps) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Hero />
-			<MainContainer products={products} />
+			<MainContainer tags={tags} products={products} />
 		</>
 	)
 }
@@ -40,10 +40,12 @@ export const getStaticProps: GetStaticProps = async () => {
 	try {
 		const layoutQuery = nextClient.getLayout()
 		const productsQuery = nextClient.getProducts()
+		const tagQuery = nextClient.getProductTags()
 
-		const [layout, products] = await Promise.allSettled([
+		const [layout, products, tags] = await Promise.allSettled([
 			layoutQuery,
 			productsQuery,
+			tagQuery,
 		])
 
 		return {
@@ -51,6 +53,8 @@ export const getStaticProps: GetStaticProps = async () => {
 				layout: (layout as PromiseFulfilledResult<GetLayoutQuery>).value,
 				products: (products as PromiseFulfilledResult<GetProductsQuery>).value
 					.products.nodes,
+				tags: (tags as PromiseFulfilledResult<GetProductTagsQuery>).value
+					.productTags.edges,
 			},
 		}
 	} catch (error) {

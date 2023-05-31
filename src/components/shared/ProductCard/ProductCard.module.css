@@ -6,11 +6,16 @@
 
 .product-thumbnail {
 	background-color: darkslateblue;
-	padding: 2rem;
 	border-radius: var(--radius-lg);
 	margin-bottom: 1rem;
 	position: relative;
-	overflow: hidden;
+
+	.image-holder {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		padding: 2rem;
+	}
 }
 
 .product-thumbnail img {
@@ -48,6 +53,7 @@
 	backdrop-filter: blur(10px);
 	opacity: 0;
 	transition: 300ms opacity;
+	border-radius: var(--radius-lg);
 }
 
 .product-thumbnail-overlay {
@@ -79,8 +85,8 @@
 
 .product-card-tags {
 	position: absolute;
-	left: 2rem;
-	top: 2rem;
+	left: -1rem;
+	top: 1rem;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -90,8 +96,32 @@
 }
 
 .product-card-tags li {
+	background-color: var(--lightGrey);
+	color: var(--black);
+	padding: 0.7rem 1rem;
+
+	&.active {
+		background-color: var(--pink);
+		color: var(--white);
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		width: 0;
+		height: 0;
+		left: 0;
+		bottom: 0;
+		transform: translateY(100%) rotate(180deg);
+
+		border: 0.6rem solid transparent;
+		border-left: 0.6rem solid var(--darkPink);
+		border-bottom: 0.6rem solid var(--darkPink);
+		z-index: -1;
+	}
+}
+.product-card-tags li.active {
 	background-color: var(--pink);
 	color: var(--white);
-	padding: 0.7rem 1rem;
-	/* border-radius: 999px; */
 }

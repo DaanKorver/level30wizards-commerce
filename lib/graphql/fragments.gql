@@ -62,3 +62,9 @@ fragment Product on Product {
 		}
 	}
 }
+
+fragment ProductTags on StringConnection {
+	edges {
+		node
+	}
+}

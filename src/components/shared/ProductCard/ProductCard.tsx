@@ -7,7 +7,8 @@ import {
 	Image as TImage,
 } from '../../../../lib/generated/sdk'
 import styles from './ProductCard.module.css'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useFilter } from '@/state/filter'
 
 interface ProductCardProps {
 	title: string
@@ -21,6 +22,8 @@ interface ProductCardProps {
 
 export function ProductCard(props: ProductCardProps) {
 	const { title, image, price, shortDesc, color, slug, tags } = props
+
+	const filter = useFilter()
 
 	return (
 		<motion.div
@@ -38,27 +41,34 @@ export function ProductCard(props: ProductCardProps) {
 				y: 10,
 			}}>
 			<Link href={`/product/${slug}`} className={styles['product-card']}>
+				<ul className={styles['product-card-tags']}>
+					{tags
+						.filter(tag => tag === filter)
+						.map(tag => (
+							<motion.li
+								layout
+								className={`fs-lg ${tag === filter ? styles['active'] : ''}`}
+								key={tag}>
+								{tag}
+							</motion.li>
+						))}
+				</ul>
 				<div
 					className={styles['product-thumbnail']}
 					style={{
 						backgroundColor: transparentize(color, 0.5),
 					}}>
-					<ul className={styles['product-card-tags']}>
-						{tags.map(tag => (
-							<li className="fs-xs" key={tag}>
-								{tag}
-							</li>
-						))}
-					</ul>
 					<div className={styles['product-thumbnail-overlay']}>
 						<p className="fs-xl">View donut</p>
 					</div>
-					<Image
-						width={image.width as number}
-						height={image.height as number}
-						src={image.url}
-						alt={title}
-					/>
+					<div className={styles['image-holder']}>
+						<Image
+							width={image.width as number}
+							height={image.height as number}
+							src={image.url}
+							alt={title}
+						/>
+					</div>
 				</div>
 				<div className={styles['product-price']}>
 					<h3 className="fs-xl">{title}</h3>
