@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react'
 import styles from './Filters.module.css'
 import { useFilter } from '@/state/filter'
+import { ProductTagsFragment } from '../../../../lib/generated/sdk'
 
 export const links = () => [{ rel: 'stylesheet', href: styles }]
 
-interface FiltersProps {}
+interface FiltersProps {
+	tags: ProductTagsFragment['edges']
+}
 
-const filters = ['Glazed', 'Chocolate', 'Fruit', 'Filled', 'Sprinkles']
 export function Filters(props: FiltersProps) {
+	const { tags } = props
+	const filters = tags.map(tag => tag.node)
+
 	const [activeFilter, setFilter] = useState(-1)
 
 	useEffect(() => {
-		if (activeFilter > -1) {
-			useFilter.setState(filters[activeFilter])
-		}
+		useFilter.setState(activeFilter > -1 ? filters[activeFilter] : '')
 	}, [activeFilter])
 
 	return (
@@ -27,7 +30,9 @@ export function Filters(props: FiltersProps) {
 							<button
 								data-content={filter}
 								className={activeFilter === i ? styles['active'] : ''}
-								onClick={() => setFilter(i)}>
+								onClick={() => {
+									setFilter(activeFilter === i ? -1 : i)
+								}}>
 								{filter}
 							</button>
 						</li>
