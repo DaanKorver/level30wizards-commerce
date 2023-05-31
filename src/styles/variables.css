@@ -12,6 +12,7 @@
 	--radius-lg: 24px;
 	--radius-xl: 36px;
 	--vh: 1vh;
+	--page: 1;
 }
 
 @supports (height: 1svh) {

@@ -43,6 +43,9 @@ body .page {
 	min-height: 100svh;
 	display: grid;
 	grid-template-rows: 1fr auto;
+
+	opacity: var(--page);
+	transition: 100ms opacity ease-in-out;
 }
 
 h1,

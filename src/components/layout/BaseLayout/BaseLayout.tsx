@@ -5,7 +5,6 @@ import { Footer, Items } from '../Footer/Footer'
 import { GetLayoutQuery, MenuItem } from '../../../../lib/generated/sdk'
 import sanitizeUrls from '@/utils/sanitizeUrl'
 import { CartDrawer } from '@/components/shared/CartDrawer/CartDrawer'
-import { Transition } from '@/components/shared/Transition/Transition'
 
 interface BaseLayoutProps {
 	layout: GetLayoutQuery
@@ -57,11 +56,11 @@ export function BaseLayout(props: BaseLayoutProps) {
 		<>
 			<CartDrawer />
 
-			<Transition>
+			<div className="page">
 				<Header items={headerItems} />
 				<main>{children}</main>
 				<Footer items={footerItems} />
-			</Transition>
+			</div>
 		</>
 	)
 }

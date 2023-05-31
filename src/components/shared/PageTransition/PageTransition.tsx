@@ -39,12 +39,14 @@ export function PageTransition() {
 
 			setInTranstion(true)
 			controls.start('visible')
+			document.body.style.setProperty('--page', '0')
 		}
 
 		const changeRouteComplete = (e: string) => {
 			setPath(pathname)
 			setTimeout(() => {
 				controls.start('hidden')
+				document.body.style.setProperty('--page', '1')
 				setInTranstion(false)
 			}, 500)
 		}
