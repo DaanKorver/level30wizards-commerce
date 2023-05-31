@@ -58,3 +58,30 @@ query getProductTags {
 		...ProductTags
 	}
 }
+
+query getLegals {
+	shop {
+		privacyPolicy {
+			...Legal
+		}
+		refundPolicy {
+			...Legal
+		}
+		shippingPolicy {
+			...Legal
+		}
+		termsOfService {
+			...Legal
+		}
+	}
+}
+
+query getPages {
+	pages(first: 10) {
+		nodes {
+			handle
+			body
+			title
+		}
+	}
+}

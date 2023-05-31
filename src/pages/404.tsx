@@ -17,6 +17,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 		return {
 			props: {
+				statusCode: 404,
 				layout: (layout as PromiseFulfilledResult<GetLayoutQuery>).value,
 			},
 		}
@@ -25,11 +26,6 @@ export const getStaticProps: GetStaticProps = async () => {
 			notFound: true,
 		}
 	}
-}
-
-Error.getInitialProps = ({ res, err }) => {
-	const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-	return { statusCode }
 }
 
 export default Error

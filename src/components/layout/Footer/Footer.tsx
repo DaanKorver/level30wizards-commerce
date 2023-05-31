@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { MenuItem } from '../../../../lib/generated/sdk'
 import styles from './Footer.module.css'
 
@@ -44,7 +45,7 @@ function FooterList(props: { title: string; items: Items[] }) {
 			<ul>
 				{items.map(item => (
 					<li key={item.url}>
-						<a href={item.url}>{item.title}</a>
+						<Link href={item.url}>{item.title}</Link>
 					</li>
 				))}
 			</ul>
