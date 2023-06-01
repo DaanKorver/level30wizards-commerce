@@ -3128,7 +3128,7 @@
           },
           {
             "name": "walletPreferences",
-            "description": "A set of wallet preferences tied to the buyer that is interacting with the cart.\nPreferences can be used to populate relevant payment fields in the checkout flow.\n",
+            "description": "A set of wallet preferences tied to the buyer that is interacting with the cart.\nPreferences can be used to populate relevant payment fields in the checkout flow.\n  Accepted value: `[\"shop_pay\"]`.\n",
             "type": {
               "kind": "LIST",
               "name": null,

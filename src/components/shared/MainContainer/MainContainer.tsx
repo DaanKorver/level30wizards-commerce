@@ -55,7 +55,7 @@ export function MainContainer(props: MainContainerProps) {
 										id,
 										tags,
 										priceRange,
-										metafield,
+										accent,
 									},
 									i
 								) => (
@@ -65,7 +65,7 @@ export function MainContainer(props: MainContainerProps) {
 										image={(media.nodes as MediaImage[])[0].image as Image}
 										price={priceRange}
 										shortDesc=""
-										color={metafield?.value as string}
+										color={accent?.value as string}
 										slug={handle}
 										tags={tags}
 									/>

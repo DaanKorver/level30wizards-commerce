@@ -27,8 +27,18 @@ fragment Product on Product {
 	title
 	handle
 	description
-	metafield(key: "accent", namespace: "custom") {
+	accent: metafield(key: "accent", namespace: "custom") {
+		type
 		value
+	}
+	ingredients: metafield(key: "ingredients", namespace: "custom") {
+		type
+		value
+		id
+		namespace
+		key
+		value
+		type
 	}
 	variants(first: 5) {
 		edges {

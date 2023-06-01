@@ -1,9 +1,10 @@
 import transparentize from '@/utils/transparentize'
-import { AddToCartButton, BuyNowButton, Money } from '@shopify/hydrogen-react'
+import { AddToCartButton, BuyNowButton, Money, useProduct } from '@shopify/hydrogen-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { MediaImage, ProductFragment } from '../../../../lib/generated/sdk'
 import styles from './SingleProduct.module.css'
+import { Accordion } from '../Accordion/Accordion'
 
 interface SingleProductProps {
 	item: ProductFragment
@@ -21,7 +22,7 @@ export function SingleProduct(props: SingleProductProps) {
 			<div
 				className={styles['thumb']}
 				style={{
-					backgroundColor: transparentize(item.metafield?.value as string, 0.5),
+					backgroundColor: transparentize(item.accent?.value as string, 0.5),
 				}}>
 				<Image
 					width={image?.width as number}
@@ -66,6 +67,15 @@ export function SingleProduct(props: SingleProductProps) {
 						Buy now
 					</BuyNowButton>
 				</div>
+
+				<Accordion title="Ingredients">
+					<ul>
+						{(JSON.parse(item.ingredients?.value as string) as string[]).map(ingredient => (
+							<li key={ingredient}>{ingredient}</li>
+						))}
+					</ul>
+				</Accordion>
+				
 			</div>
 		</div>
 	)
