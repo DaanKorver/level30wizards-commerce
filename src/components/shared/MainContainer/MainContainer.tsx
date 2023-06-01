@@ -30,9 +30,6 @@ export function MainContainer(props: MainContainerProps) {
 				<div className={styles['product-container']}>
 					<AnimatePresence>
 						{products
-							// .filter(product => {
-							// 	return !filter ? true : product.tags.includes(filter)
-							// })
 							.sort((a, b) => {
 								const aHasTag = a.tags.includes(filter)
 								const bHasTag = b.tags.includes(filter)

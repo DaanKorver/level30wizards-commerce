@@ -717,6 +717,7 @@ export type CartBuyerIdentityInput = {
   /**
    * A set of wallet preferences tied to the buyer that is interacting with the cart.
    * Preferences can be used to populate relevant payment fields in the checkout flow.
+   *   Accepted value: `["shop_pay"]`.
    *
    */
   walletPreferences?: InputMaybe<Array<Scalars['String']>>;
